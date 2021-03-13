@@ -118,11 +118,21 @@ pub mod board {
 
         }
 
-        pub fn move_piece(&mut self, moveset:String) {
-
+        pub fn is_valid_move(&mut self, origin:String, destination:String) -> bool {
+            return true;
         }
 
-        pub fn check_mate_player(){
+        pub fn move_piece(&mut self, origin:String, destination:String) -> bool {
+            /*if !is_valid_move(origin, destination) {
+                return false;
+            }*/
+        }
+
+        pub fn check_mate_player(&self) -> Player {
+            return Player::None;
+        }
+
+        pub fn computer_move(&self) {
 
         }
 
