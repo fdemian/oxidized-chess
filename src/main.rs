@@ -11,16 +11,15 @@ fn main() {
 
     /*
 
-        - Mostrar estado inicial.
+    MIENTRAS (NO JAQUE MATE)
+  - Tomar input del jugador (E.G A1, B5).
+  - Mover las piezas como quiere el jugador.
+  - Verificar si el programa esta en jaque mate.
+  - Dibujar tabla.
+  - Mover piezas de la computadora.
+  - Verificar si el programa esta en jaque mate.
+  FIN
 
-        MIENTRAS (NO JAQUE MATE)
-        - Tomar input del jugador (E.G A1, B5).
-        - Mover las piezas como quiere el jugador.
-        - Verificar si el programa esta en jaque mate.
-        - Dibujar tabla.
-        - Mover piezas de la computadora.
-        - Verificar si el programa esta en jaque mate.
-        FIN
 
         MOVER LAS PIEZAS: (TABLERO)
             - Verificar que haya una pieza en la posición buscada.
@@ -38,9 +37,24 @@ fn main() {
 
     // TODO:
     // Instantiate and initialize chessboard.
+    let mut check_mate:boolean = false;
     let mut chess_board = board::board::Board{ positions: array![[]] };
     chess_board.reset();
     chess_board.draw();
+
+    while !check_mate {
+        /*
+        MIENTRAS (NO JAQUE MATE)
+      - Tomar input del jugador (E.G A1, B5).
+      - Mover las piezas como quiere el jugador.
+      - Verificar si el programa esta en jaque mate.
+      - Dibujar tabla.
+      - Mover piezas de la computadora.
+      - Verificar si el programa esta en jaque mate.
+      FIN
+      */
+
+    }
 
     // Get user input.
     let input = input::input::get_move_from_user();
