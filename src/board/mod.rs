@@ -21,24 +21,24 @@ pub mod board {
           let mut INITIAL_STATE:Array2<ChessPiece> = array![
 
               [
-                ChessPiece { kind: PieceType::Rook, player: Player::Black },
-                ChessPiece { kind: PieceType::Knight, player :Player::Black },
-                ChessPiece { kind: PieceType::Bishop, player: Player::Black },
-                ChessPiece { kind: PieceType::Queen, player: Player::Black },
-                ChessPiece { kind: PieceType::King, player: Player::Black },
-                ChessPiece { kind: PieceType::Bishop, player: Player::Black },
-                ChessPiece { kind: PieceType::Knight, player: Player::Black },
-                ChessPiece { kind: PieceType::Rook, player: Player::Black }
+                ChessPiece { kind: PieceType::Rook, player: Player::Computer },
+                ChessPiece { kind: PieceType::Knight, player :Player::Computer },
+                ChessPiece { kind: PieceType::Bishop, player: Player::Computer },
+                ChessPiece { kind: PieceType::Queen, player: Player::Computer },
+                ChessPiece { kind: PieceType::King, player: Player::Computer },
+                ChessPiece { kind: PieceType::Bishop, player: Player::Computer },
+                ChessPiece { kind: PieceType::Knight, player: Player::Computer },
+                ChessPiece { kind: PieceType::Rook, player: Player::Computer }
               ],
               [
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black },
-                ChessPiece { kind: PieceType::Pawn, player: Player::Black }
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer },
+                ChessPiece { kind: PieceType::Pawn, player: Player::Computer }
               ],
               [ // Row 3
                 ChessPiece { kind: PieceType::Empty, player: Player::None },
@@ -81,24 +81,24 @@ pub mod board {
                 ChessPiece { kind: PieceType::Empty, player: Player::None }
               ],
               [
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White },
-                ChessPiece { kind: PieceType::Pawn, player: Player::White }
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User },
+                ChessPiece { kind: PieceType::Pawn, player: Player::User }
               ],
               [
-                ChessPiece { kind: PieceType::Rook, player: Player::White },
-                ChessPiece { kind: PieceType::Knight, player: Player::White },
-                ChessPiece { kind: PieceType::Bishop, player: Player::White },
-                ChessPiece { kind: PieceType::Queen, player: Player::White },
-                ChessPiece { kind: PieceType::King, player: Player::White },
-                ChessPiece { kind: PieceType::Bishop, player: Player::White },
-                ChessPiece { kind: PieceType::Knight, player: Player::White },
-                ChessPiece { kind: PieceType::Rook, player: Player::White }
+                ChessPiece { kind: PieceType::Rook, player: Player::User },
+                ChessPiece { kind: PieceType::Knight, player: Player::User },
+                ChessPiece { kind: PieceType::Bishop, player: Player::User },
+                ChessPiece { kind: PieceType::Queen, player: Player::User },
+                ChessPiece { kind: PieceType::King, player: Player::User },
+                ChessPiece { kind: PieceType::Bishop, player: Player::User },
+                ChessPiece { kind: PieceType::Knight, player: Player::User },
+                ChessPiece { kind: PieceType::Rook, player: Player::User }
               ]
             ];
 
@@ -126,6 +126,7 @@ pub mod board {
             /*if !is_valid_move(origin, destination) {
                 return false;
             }*/
+            return true;
         }
 
         pub fn check_mate_player(&self) -> Player {
