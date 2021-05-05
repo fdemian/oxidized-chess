@@ -4,8 +4,6 @@ mod chesspiece;
 mod player;
 mod input;
 
-extern crate ndarray;
-use ndarray::array;
 use player::player::Player;
 
 fn main() {
@@ -13,7 +11,7 @@ fn main() {
     /*
 
     MIENTRAS (NO JAQUE MATE)
-  - Tomar input del jugador (E.G A1, B5).
+  - Tomar input del jugador (E.G A1, B5). (X)
   - Mover las piezas como quiere el jugador.
   - Verificar si el programa esta en jaque mate.
   - Dibujar tabla.
@@ -38,9 +36,9 @@ fn main() {
 
     // TODO:
     // Instantiate and initialize chessboard.
-    let mut check_mate_player:Player;
+    let mut check_mate_player:Player = Player::None;
     let mut check_mate:bool = false;
-    let mut chess_board = board::board::Board{ positions: array![[]] };
+    let mut chess_board = board::board::Board{ positions: vec![vec![]] };
     chess_board.reset();
     chess_board.draw();
 
@@ -66,6 +64,13 @@ fn main() {
         chess_board.computer_move();
       }
 
+    }
+
+    if check_mate_player == Player::User {
+        println!("You win");
+    }
+    else {
+        println!("You lose! (Computer wins!)");
     }
 
     // Get user input.

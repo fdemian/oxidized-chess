@@ -3,6 +3,7 @@ pub mod chesspiece {
     pub use crate::piece::piece::PieceType;
     pub use crate::player::player::Player;
 
+    #[derive(Copy, Clone)]
     pub struct ChessPiece {
         pub kind: PieceType,
         pub player: Player
@@ -11,17 +12,8 @@ pub mod chesspiece {
     impl ChessPiece {
 
         /*
-        fn get_name(&self) -> String {
-            match self.kind {
-             PieceType::Pawn => 'Pawn',
-             PieceType::Bishop => '♝',
-             PieceType::Knight => '♞',
-             PieceType::Rook => '♜',
-             PieceType::Queen => '♛',
-             PieceType::King => '♚',
-             PieceType::Empty => ' '
-           }
-       }*/
+        pub fn get_moves(&self, coordinates:Vec<Vec<u32>>) -> Vec<>
+        */
 
         pub fn get_text_repr(&self) -> char {
            match self.kind {
@@ -34,7 +26,6 @@ pub mod chesspiece {
             PieceType::Empty => ' '
           }
        }
-
 
    }
 }
