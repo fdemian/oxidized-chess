@@ -107,7 +107,7 @@ pub mod board {
           for r in 0..BOARD_LIMIT {
              for c in 0..BOARD_LIMIT {
                 let piece = &self.positions[r][c];
-                print!("{}", piece.get_text_repr());
+                print!("[{0}]", piece.get_text_repr());
              }
              println!(" ");
          }
