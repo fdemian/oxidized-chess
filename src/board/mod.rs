@@ -1,16 +1,38 @@
 pub mod board {
 
+    use rand::seq::SliceRandom;
+    use rand::thread_rng;
+    use rand::Rng;
+
     const BOARD_LIMIT:usize = 8;
 
     pub use crate::piece::piece::PieceType;
     pub use crate::player::player::Player;
     pub use crate::chesspiece::chesspiece::ChessPiece;
+    pub use crate::coordinates::coordinates::Coordinates;
 
     pub struct Board {
-     pub positions: Vec<Vec<ChessPiece>>
+     pub positions: Vec<Vec<ChessPiece>>,
+     pub computer_pieces: Vec<Coordinates>,
     }
 
     impl Board {
+
+        pub fn get_char_from_number(character:&u32) -> char {
+            let column:char = match character {
+              0 => 'A',
+              1 => 'B',
+              2 => 'C',
+              3 => 'D',
+              4 => 'E',
+              5 => 'F',
+              6 => 'G',
+              7 => 'H',
+              _  => '_'
+            };
+
+            return column;
+        }
 
         pub fn reset(&mut self) {
 
@@ -98,15 +120,42 @@ pub mod board {
               ]
             ];
 
+            // Initial board positions and computer pices coordinates.
             self.positions = INITIAL_STATE;
+            self.computer_pieces= vec![
+                Coordinates{ row: 0, col: 0},
+                Coordinates{ row: 0, col: 1},
+                Coordinates{ row: 0, col: 2},
+                Coordinates{ row: 0, col: 3},
+                Coordinates{ row: 0, col: 4},
+                Coordinates{ row: 0, col: 5},
+                Coordinates{ row: 0, col: 6},
+                Coordinates{ row: 0, col: 7},
+                Coordinates{ row: 1, col: 0},
+                Coordinates{ row: 1, col: 1},
+                Coordinates{ row: 1, col: 2},
+                Coordinates{ row: 1, col: 3},
+                Coordinates{ row: 1, col: 4},
+                Coordinates{ row: 1, col: 5},
+                Coordinates{ row: 1, col: 6},
+                Coordinates{ row: 1, col: 7},
+            ];
         }
 
         pub fn draw(&mut self) {
+
+          let mut positon_fmt:char;
 
           // Iterate rows
           for r in 0..BOARD_LIMIT {
              for c in 0..BOARD_LIMIT {
                 let piece = &self.positions[r][c];
+                /*if r == 0 {
+
+                 positon_fmt = get_char_from_number(r);
+
+             }*/
+
                 print!("[{0}]", piece.get_text_repr());
              }
              println!(" ");
@@ -134,8 +183,10 @@ pub mod board {
             // Piece exists and the user wants to move the piece inside the board.
 
             // GET PIECE MOVES (LEGAL PATHS) and check
-            //if the destination coordintes coincide with the last element of the path.
+            //if the destination coordintes coincide with any element of the path.
             // if they do , return true, else return false.
+
+           // get_moves(origin);
 
             return true;
         }
@@ -207,8 +258,61 @@ pub mod board {
             return Player::None;
         }
 
-        pub fn computer_move(&self) {
 
+        // Get a random computer piece and move it.
+        pub fn computer_move(&mut self) {
+
+            let mut rand_piece:ChessPiece = ChessPiece {
+                kind: PieceType::Empty,
+                player: Player::None
+            };
+            let mut rand_coord:Coordinates = Coordinates { row: 0, col: 0};
+            let mut rand_index = 0;
+
+            //Get a random (non empty) computer piece.
+            while rand_piece.kind == PieceType::Empty {
+              let len = self.computer_pieces.len();
+              let mut rng = rand::thread_rng();
+
+              rand_index = rng.gen_range(0..len-1);
+              rand_coord = self.computer_pieces[rand_index];
+              rand_piece = self.positions[(rand_coord.row as usize)][(rand_coord.col as usize)];
+
+              println!("{0}", rand_piece.kind == PieceType::Empty);
+              println!("{0}", rand_piece.get_text_repr());
+
+            }
+
+            // Get all posible moves for that piece.
+            let coordinate_moves:Vec<u32> = vec![rand_coord.row, rand_coord.col];
+            let moves = rand_piece.get_moves(&coordinate_moves);
+
+            // Pick a random move.
+            let mut rng2 = rand::thread_rng();
+            let move_len = moves.len();
+            let mut rand_index2 = 0;
+
+            if move_len != 1 {
+               rand_index2 = rng2.gen_range(0..move_len-1);
+            }
+
+            let move_coord:Coordinates = moves[rand_index2];
+            let comp_move_dest:Vec<u32> = vec![move_coord.col, move_coord.row];
+
+            let mut c0 = coordinate_moves[0];
+            let mut c1 = coordinate_moves[1];
+            println!("[{0}, {1}]", c0, c1);
+            println!("{0}", self.positions[c0 as usize][c1 as usize].get_text_repr());
+            println!(":::::::");
+            c0 = comp_move_dest[0];
+            c1 =  comp_move_dest[1];
+            println!("[{0}, {1}]", c0, c1);
+            println!("{0}", self.positions[c0 as usize][c1 as usize].get_text_repr());
+            println!(":::::::");
+
+            // Perform the move.
+            self.perform_move(coordinate_moves ,comp_move_dest);
+            self.computer_pieces[rand_index] = move_coord;
         }
 
     }

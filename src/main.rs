@@ -3,6 +3,7 @@ mod piece;
 mod chesspiece;
 mod player;
 mod input;
+mod coordinates;
 
 use player::player::Player;
 
@@ -38,7 +39,7 @@ fn main() {
     // Instantiate and initialize chessboard.
     let mut check_mate_player:Player = Player::None;
     let mut check_mate:bool = false;
-    let mut chess_board = board::board::Board{ positions: vec![vec![]] };
+    let mut chess_board = board::board::Board{ positions: vec![vec![]], computer_pieces: vec![] };
     chess_board.reset();
     chess_board.draw();
 
