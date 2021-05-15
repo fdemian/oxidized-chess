@@ -18,7 +18,7 @@ pub mod board {
 
     impl Board {
 
-        pub fn get_char_from_number(character:&u32) -> char {
+        pub fn get_char_from_number(&self, character:&u32) -> char {
             let column:char = match character {
               0 => 'A',
               1 => 'B',
@@ -144,20 +144,19 @@ pub mod board {
 
         pub fn draw(&mut self) {
 
-          let mut positon_fmt:char;
-
           // Iterate rows
           for r in 0..BOARD_LIMIT {
              for c in 0..BOARD_LIMIT {
                 let piece = &self.positions[r][c];
-                /*if r == 0 {
-
-                 positon_fmt = get_char_from_number(r);
-
-             }*/
-
-                print!("[{0}]", piece.get_text_repr());
+                if c == 0 {
+                 let positon_fmt:char = self.get_char_from_number(&(c as u32));
+                 print!("{0} [{1}]", r+1, piece.get_text_repr());
+                }
+                else {
+                  print!(" [{0}]", piece.get_text_repr());
+                }
              }
+
              println!(" ");
          }
 
